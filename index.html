@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Jogo da Velha</title>
+		<meta charset="utf-8">
+
+		<script type="text/javascript">
+			//ZERANDO SESSION
+			sessionStorage.removeItem('jogo');
+			function jogo(e){
+
+				var jogo = JSON.parse(sessionStorage.getItem('jogo'));
+				var vez = sessionStorage.getItem('vez');
+				if (jogo){
+
+					console.info(e.target.id);
+					var bloco = e.target.id;
+					switch (bloco) {
+						  case "block-1":
+						    jogo['bloco1'] = vez;
+						    break;
+						  case "block-2":
+						    jogo['bloco2'] = vez;
+						    break;
+						  case "block-3":
+						    jogo['bloco3'] = vez;
+						    break;
+						  case "block-4":
+						    jogo['bloco4'] = vez;
+						    break;
+						  case "block-5":
+						  	jogo['bloco5'] = vez;
+						    break;
+						  case "block-6":
+						    jogo['bloco6'] = vez;
+						    break;
+						  case "block-7":
+						    jogo['bloco7'] = vez;
+						    break;
+						  case "block-8":
+						    jogo['bloco8'] = vez;
+						    break;
+						  case "block-9":
+						    jogo['bloco9'] = vez;
+						    break;
+						  default:
+						  	alert("Erro ao marcar o ponto!");
+						    break;
+						}
+
+						jogo = JSON.stringify(jogo);
+						sessionStorage.setItem('jogo', jogo);
+						var jogo = JSON.parse(sessionStorage.getItem('jogo'));
+
+						console.info(jogo['bloco1']+
+							  jogo['bloco2']+
+							  jogo['bloco3']+ 
+							  jogo['bloco4']+ 
+							  jogo['bloco5']+ 
+							  jogo['bloco6']+ 
+							  jogo['bloco7']+ 
+							  jogo['bloco8']+ 
+							  jogo['bloco9']);
+				}else{
+					vez = "x";
+					sessionStorage.setItem('vez', vez);
+
+					var jogo = {'bloco1': 'n', 
+								'bloco2': 'n',
+								'bloco3': 'n',
+								'bloco4': 'n',
+								'bloco5': 'n',
+								'bloco6': 'n',
+								'bloco7': 'n',
+								'bloco8': 'n',
+								'bloco9': 'n'};	
+
+					
+					console.info(e.target.id);
+					var bloco = e.target.id;
+					switch (bloco) {
+						  case "block-1":
+						    jogo['bloco1'] = vez;
+						    break;
+						  case "block-2":
+						    jogo['bloco2'] = vez;
+						    break;
+						  case "block-3":
+						    jogo['bloco3'] = vez;
+						    break;
+						  case "block-4":
+						    jogo['bloco4'] = vez;
+						    break;
+						  case "block-5":
+						  	jogo['bloco5'] = vez;
+						    break;
+						  case "block-6":
+						    jogo['bloco6'] = vez;
+						    break;
+						  case "block-7":
+						    jogo['bloco7'] = vez;
+						    break;
+						  case "block-8":
+						    jogo['bloco8'] = vez;
+						    break;
+						  case "block-9":
+						    jogo['bloco9'] = vez;
+						    break;
+						  default:
+						  	alert("Erro ao marcar o ponto!");
+						    break;
+						}
+									
+				}
+
+				jogo = JSON.stringify(jogo);
+				sessionStorage.setItem('jogo', jogo);
+				var jogo = JSON.parse(sessionStorage.getItem('jogo'));
+				console.info(jogo);
+
+
+
+
+
+				var bloco = e.target;
+				//CONTROLA AS IMAGENS
+				if(vez == "x"){
+					bloco.setAttribute('src', 'x.png');
+					vez = "c";
+					sessionStorage.setItem('vez', vez);
+					document.getElementById("labelvez").innerHTML = "VEZ DA BOLINHA";
+				}else if(vez == "c"){
+					bloco.setAttribute('src', 'circulo.png');
+					vez = "x";
+					sessionStorage.setItem('vez', vez);
+					document.getElementById("labelvez").innerHTML = "VEZ DO X";
+				}
+
+				console.info(jogo['bloco1']+'<- Conteúdo de jogo 1');
+
+				//VÊ SE DEU VELHA
+				var jogar_string = jogo['bloco1']+jogo['bloco2']+jogo['bloco3']+jogo['bloco4']+jogo['bloco5']+jogo['bloco6']+jogo['bloco7']+jogo['bloco8']+jogo['bloco9'];
+
+				if(!jogar_string.match(/n/)){
+
+					document.getElementById("ganhou").style.display = 'block';
+					document.getElementById("quemvenceu").innerHTML = "DEU VELHA!";	
+				}else{
+					//CALCULANDO QUEM GANHOU
+					if(jogo['bloco1'] == 'x' && jogo["bloco2"] == 'x' && jogo["bloco3"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco1"] == 'c' && jogo["bloco2"] == 'c' && jogo["bloco3"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";
+					}
+					if(jogo["bloco4"] == 'x' && jogo["bloco5"] == 'x' && jogo["bloco6"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco4"] == 'c' && jogo["bloco5"] == 'c' && jogo["bloco6"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";
+					}
+					if(jogo["bloco7"] == 'x' && jogo["bloco8"] == 'x' && jogo["bloco9"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco7"] == 'c' && jogo["bloco8"] == 'c' && jogo["bloco9"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";
+					}
+
+
+					if(jogo["bloco1"] == 'x' && jogo["bloco5"] == 'x' && jogo["bloco9"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco1"] == 'c' && jogo["bloco5"] == 'c' && jogo["bloco9"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";
+					}
+					
+					if(jogo["bloco4"] == 'x' && jogo["bloco6"] == 'x' && jogo["bloco9"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco4"] == 'c' && jogo["bloco6"] == 'c' && jogo["bloco9"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";
+					}
+
+					if(jogo["bloco1"] == 'x' && jogo["bloco5"] == 'x' && jogo["bloco9"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco1"] == 'c' && jogo["bloco5"] == 'c' && jogo["bloco9"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";	
+					}
+
+					if(jogo["bloco3"] == 'x' && jogo["bloco6"] == 'x' && jogo["bloco9"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco3"] == 'c' && jogo["bloco6"] == 'c' && jogo["bloco9"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";	
+					}
+
+					if(jogo["bloco1"] == 'x' && jogo["bloco4"] == 'x' && jogo["bloco7"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco1"] == 'c' && jogo["bloco4"] == 'c' && jogo["bloco7"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";	
+					}
+
+					if(jogo["bloco2"] == 'x' && jogo["bloco5"] == 'x' && jogo["bloco8"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco2"] == 'c' && jogo["bloco5"] == 'c' && jogo["bloco8"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";	
+					}
+
+					if(jogo["bloco3"] == 'x' && jogo["bloco5"] == 'x' && jogo["bloco7"] == 'x'){
+						alert("O X GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O X VENCEU O JOGO!";
+					}else if(jogo["bloco3"] == 'c' && jogo["bloco5"] == 'c' && jogo["bloco7"] == 'c'){
+						alert("O BOLINHA GANHOU!!");
+						document.getElementById("ganhou").style.display = 'block';
+						document.getElementById("quemvenceu").innerHTML = "O BOLINHA VENCEU O JOGO!";	
+					}
+				}
+				
+				
+			}
+		</script>
+		
+		<style>
+			body{
+				background-color: rgb(220, 220, 220);
+			}
+			.container{
+				margin: 0 auto;
+				width: 700px;
+			}
+			section.tabuleiro{
+				width: 461px;
+				height: 461px;
+				background-color: #FFDAB9;
+				box-shadow: 0px 5px 5px 0px #000;
+				float: right;
+			}
+			.bloco{
+				width: 150px;
+				height: 150px;
+				background-color: rgba(105,105,105, 0.7);
+				margin-right: 1px;
+				margin-bottom: 1px;
+				display: inline-block;
+				cursor: pointer;
+
+			}
+			.bloco:hover{
+				background-color: rgba(255,0,0,0.4);
+			}
+
+			aside{
+				width: 200px;
+				height: 461px;
+				background-color: red;
+				margin-right: 10px;
+				float: left;
+			}
+			.ganhou{
+				background-color: green;
+				width: 461px; 
+				height: 461px;
+				position: absolute;
+				display: none;
+				color: white;
+			}
+			button{
+				cursor: pointer;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div class="container">
+			<aside>
+				<h1 id="labelvez">Vez do X</h1>
+			</aside>
+			<section class="tabuleiro">	
+				<div class="ganhou" id="ganhou">
+					<center><h1 id="quemvenceu">Ganhou</h1></center>
+					<center><button onclick="window.location.reload();">Recomeçar</button></center>
+				</div>
+				<img class="bloco" id="block-1" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-2" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-3" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-4" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-5" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-6" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-7" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-8" onclick="jogo(event);"></img>
+				<img class="bloco" id="block-9" onclick="jogo(event);"></img>
+			</section>
+		</div>
+	</body>
+</html>
